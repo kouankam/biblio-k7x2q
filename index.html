@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Bibliothèque Kouankam</title>
+<title>Bibliothèque DOMINIQUE MALAQUAIS</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* Concept: la bibliothèque comme plan de meuble. Cases étiquetées A1…F15 comme sur les étagères, liste de livres dans l'ordre des dos, de gauche à droite. */
@@ -38,7 +38,59 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 .search input::-webkit-search-cancel-button{display:none}
 .search input::placeholder{color:var(--muted)}
 .search button{position:absolute;right:4px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--muted);padding:6px 8px;font-size:18px;line-height:1}
-.search button[hidden]{display:none}
+.search button
+/* étagère 3D */
+.shelfbox{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 86px);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+.stage{position:relative;height:372px;margin-top:6px;border-radius:6px;background:linear-gradient(var(--surface),var(--bg));overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;outline-offset:-2px;cursor:grab}
+.stage:active{cursor:grabbing}
+.mark{position:absolute;left:0;right:0;top:6px;text-align:center;font:800 clamp(80px,17vw,190px)/1 var(--f-display);letter-spacing:-.04em;color:var(--accent-soft);pointer-events:none;white-space:nowrap;overflow:hidden}
+.tray{position:absolute;inset:0;perspective:1100px;perspective-origin:50% 38%}
+.floor{position:absolute;left:3%;right:3%;bottom:62px;height:14px;background:radial-gradient(ellipse at center,rgba(0,0,0,.22),transparent 70%);pointer-events:none}
+.it{position:absolute;left:50%;bottom:68px;width:var(--sw);height:var(--sh);background:var(--bg);color:var(--fg);border-radius:2px;cursor:pointer;transform-style:preserve-3d;
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),width .5s cubic-bezier(.2,.7,.2,1),height .5s cubic-bezier(.2,.7,.2,1),opacity .4s;will-change:transform;box-shadow:0 6px 14px rgba(0,0,0,.18);background-image:linear-gradient(90deg,rgba(255,255,255,.18),rgba(0,0,0,.14))}
+.it.on{width:158px;height:236px;cursor:default;box-shadow:0 18px 30px rgba(0,0,0,.28);background-image:none}
+.spine{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;border-top:5px solid rgba(255,255,255,.35);border-bottom:5px solid rgba(0,0,0,.25)}
+.spine span{writing-mode:vertical-rl;transform:rotate(180deg);font:600 11px/1.1 var(--f-body);max-height:calc(var(--sh) - 24px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.it.on .spine{display:none}
+.it .cover{display:none}.it.on .cover{display:flex}
+.cover{position:relative;width:100%;height:100%;flex-direction:column;justify-content:space-between;gap:8px;padding:14px 12px 10px;background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(0,0,0,.22)),var(--bg);color:var(--fg);border-radius:2px;overflow:hidden}
+.cover::before{content:"";position:absolute;left:7px;top:0;bottom:0;width:2px;background:rgba(0,0,0,.18);box-shadow:1px 0 0 rgba(255,255,255,.2)}
+.ct{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:7;overflow:hidden;font:800 var(--ts,17px)/1.15 var(--f-display);letter-spacing:-.01em;overflow-wrap:anywhere;padding-left:6px}
+.ca{font:500 11px/1.3 var(--f-body);opacity:.88;padding-left:6px;overflow-wrap:anywhere;max-height:3.9em;overflow:hidden}
+.cc{font:500 11px/1 var(--f-mono);font-style:normal;opacity:.8;padding-left:6px}
+.qd{position:absolute;top:9px;right:9px;width:9px;height:9px;border-radius:50%;background:#e0b24f;box-shadow:0 0 0 2px rgba(255,255,255,.65)}
+.qd.q2{background:#2fbf8f}.qd.q0{background:#ee8268}
+.cap{position:absolute;left:0;right:0;bottom:6px;text-align:center;padding-inline:60px}
+.cap strong{display:block;font:800 18px/1.2 var(--f-display);color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cap span{display:block;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav{position:absolute;top:44%;z-index:300;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0}
+.nav:hover{border-color:var(--accent);color:var(--accent)}.nav[disabled]{opacity:.35;cursor:default}
+.nav.p{left:8px}.nav.n{right:8px}
+.scrub{width:100%;margin:12px 0 0;accent-color:var(--accent)}
+.scrubrow{display:flex;gap:12px;align-items:center;margin-top:2px}
+.scrubrow .cnt{font:500 12px/1 var(--f-mono);color:var(--muted);white-space:nowrap}
+.detail{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:24px;align-items:start;margin-top:18px;padding:18px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.detail .eyebrow{font:500 12px/1.4 var(--f-mono);color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+.detail h3{font:800 clamp(24px,3.4vw,38px)/1.08 var(--f-display);letter-spacing:-.02em;color:var(--accent);margin:6px 0 4px;overflow-wrap:anywhere;text-wrap:balance}
+.detail .by{font-size:16px;margin:0 0 12px;overflow-wrap:anywhere}
+.detail dl{margin:0 0 14px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;font-size:13.5px}
+.detail dt{color:var(--muted)}.detail dd{margin:0;overflow-wrap:anywhere}
+.detail .btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-block;border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:999px;padding:7px 14px;font-weight:600;font-size:13.5px;text-decoration:none}
+.btn:hover{background:var(--accent);color:var(--on-accent)}
+.bigcover{width:190px;height:285px;box-shadow:0 18px 34px rgba(0,0,0,.28);border-radius:2px}
+.bigcover .cover{display:flex}
+.bigcover .ct{--ts:21px}
+details.listbox{margin-top:18px;border-top:1px solid var(--line);padding-top:12px}
+details.listbox summary{cursor:pointer;font-weight:600;padding:4px 0}
+@media (max-width:640px){
+  .stage{height:330px}.it.on{width:132px;height:198px}.cap{padding-inline:50px}.nav{width:36px;height:36px}
+  .detail{grid-template-columns:minmax(0,1fr);}
+  .detail .bigcover{order:-1;justify-self:center;width:150px;height:225px}
+  .detail .bigcover .ct{--ts:17px}
+}
+@media (prefers-reduced-motion:reduce){.it{transition:none}}
+[hidden]{display:none}
 main{padding-block:20px}
 h2{font:800 28px/1.1 var(--f-display);letter-spacing:-.015em;margin:0 0 4px;text-wrap:balance}
 .lede{color:var(--muted);margin:0 0 20px;max-width:62ch}
@@ -60,12 +112,8 @@ h2{font:800 28px/1.1 var(--f-display);letter-spacing:-.015em;margin:0 0 4px;text
 .seg button{border:0;background:none;padding:8px 14px;font-weight:500}
 .seg button+button{border-left:1px solid var(--line)}
 .seg button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
-.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
-@media (min-width:1080px){.layout{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:start}
-  .listcol{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);max-height:calc(100vh - 110px);display:flex;flex-direction:column}
-  .listcol .scroll{overflow:auto;min-height:0}}
-.walls{display:flex;flex-direction:column;gap:20px;min-width:0}
-.wall{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;min-width:0}
+.walls{display:flex;flex-wrap:wrap;gap:20px;min-width:0;align-items:flex-start;margin-bottom:24px}
+.wall{flex:1 1 auto;max-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;min-width:0}
 .wall-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
 .wall-h h3{font:800 18px/1.2 var(--f-display);margin:0}
 .wall-h span{font:500 12px/1 var(--f-mono);color:var(--muted)}
@@ -120,7 +168,7 @@ ul.books{list-style:none;margin:0;padding:0}
 
 <div class="wrap">
 <header class="top">
-  <button class="brand" id="home" type="button">Bibliothèque Kouankam<small id="tally"></small></button>
+  <button class="brand" id="home" type="button">Bibliothèque DOMINIQUE MALAQUAIS<small id="tally"></small></button>
   <div class="search">
     <input id="q" type="search" autocomplete="off" placeholder="Chercher un titre, un auteur, un éditeur, un sujet, un ISBN" aria-label="Rechercher dans toute la bibliothèque">
     <button id="clr" type="button" aria-label="Effacer la recherche" hidden>×</button>
@@ -145,7 +193,7 @@ for(const b of BOOKS){
   b.r=m?m[1]:null; b.col=m?+m[2]:null; b.sp=m?null:b.c;
   b.k=fold([b.t,b.a,b.p,b.s,b.i,b.y].join(' | '));
 }
-const S={room:null,sel:null,filter:-2,query:'',limit:150,open:null};
+const S={room:null,sel:null,filter:-2,query:'',limit:150,open:null,cur:0};
 const $=(t,props,...kids)=>{const e=document.createElement(t);
   if(props)for(const[k,v]of Object.entries(props)){
     if(k==='class')e.className=v;else if(k.startsWith('on'))e.addEventListener(k.slice(2),v);
@@ -159,7 +207,7 @@ const cellCounts=w=>{const m={};for(const b of BOOKS)if(b.w===w)m[b.c]=(m[b.c]||
 const roomTotal=r=>ROOMS[r].walls.reduce((n,w)=>n+count(w,()=>true),0);
 const place=b=>WALLS[b.w].name+' · '+(b.sp?(b.sp==='EnBas'?'en bas':'non classé'):b.c);
 
-function go(room,sel){S.room=room;S.sel=sel||null;S.filter=-2;S.limit=150;S.open=null;S.query='';q.value='';clr.hidden=true;render()}
+function go(room,sel){S.room=room;S.sel=sel||null;S.filter=-2;S.limit=150;S.open=null;S.cur=0;S.query='';q.value='';clr.hidden=true;render()}
 
 /* ---------- accueil ---------- */
 function mini(w){const W=WALLS[w],cc=cellCounts(w);
@@ -211,18 +259,17 @@ function wallPanel(w){
     $('div',{class:'legend'},'Livres par case',[0,1,2,3,4].map(i=>$('i',{style:`background:var(--h${i});${i?'':'border:1px dashed var(--line)'}`})),'peu → beaucoup'));
 }
 function pick(sel){const same=S.sel&&JSON.stringify(S.sel)===JSON.stringify(sel);
-  S.sel=same?null:sel;S.filter=-2;S.limit=150;S.open=null;render();
-  if(S.sel&&matchMedia('(max-width:1079px)').matches)document.getElementById('list')?.scrollIntoView({behavior:'smooth',block:'start'})}
+  S.sel=same?null:sel;S.filter=-2;S.limit=150;S.open=null;S.cur=0;render();
+  document.getElementById('shelf')?.scrollIntoView({behavior:'smooth',block:'start'})}
 
 function roomView(){
   const R=ROOMS[S.room],app=$('div');
   const seg=$('div',{class:'seg',role:'group','aria-label':'Pièce'});
   for(const[k,v]of Object.entries(ROOMS))seg.append($('button',{type:'button','aria-pressed':k===S.room,onclick:()=>go(k)},v.name));
   app.append($('div',{class:'crumbs'},seg,$('span',{class:'note'},plural(roomTotal(S.room),'livre','livres'))));
-  const walls=$('div',{class:'walls'},R.walls.map(wallPanel));
-  const lc=$('aside',{class:'listcol',id:'list'});
-  app.append($('div',{class:'layout'},walls,lc));
-  fillList(lc);return app}
+  app.append($('div',{class:'walls'},R.walls.map(wallPanel)));
+  const box=$('section',{class:'shelfbox',id:'shelf'});
+  app.append(box);fillShelf(box);return app}
 
 function selTitle(){
   if(!S.sel)return['Toute la pièce',ROOMS[S.room].name];
@@ -231,21 +278,111 @@ function selTitle(){
   if(s.r&&s.col)return['Case '+s.r+s.col,n];
   if(s.r)return['Étagère '+s.r,n+' · de gauche à droite'];
   return['Colonne '+s.col,n+' · de haut en bas'];}
+function selMark(){
+  if(!S.sel)return ROOMS[S.room].name.toUpperCase();
+  const s=S.sel;return s.sp?(s.sp==='EnBas'?'BAS':'NC'):(s.r||'')+(s.col||'')}
 function matches(){
   const R=ROOMS[S.room];
   let a=BOOKS.filter(b=>S.sel?inSel(b,S.sel):R.walls.includes(b.w));
   if(S.sel&&S.sel.col&&!S.sel.r)a=a.slice().sort((x,y)=>x.r<y.r?-1:x.r>y.r?1:0);
   return a}
-function fillList(box){
+
+/* ----- étagère 3D ----- */
+const PAL=[['#1F4E79','#FFFFFF'],['#8C2F39','#FFFFFF'],['#2E6F5E','#FFFFFF'],['#C9A227','#1B1B1B'],['#3D3B8E','#FFFFFF'],['#E4D9C0','#1B1B1B'],['#B5542E','#FFFFFF'],['#22252B','#F2F2F2'],['#5E7C8A','#FFFFFF'],['#D3DFE8','#1B1B1B'],['#6B3F69','#FFFFFF'],['#3F7D3A','#FFFFFF']];
+const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0};
+const tone=b=>PAL[hash((b.a||'')+'|'+b.t)%PAL.length];
+const dims=b=>{const h=hash(b.t+'#'+b.a);return{sw:24+(h%11),sh:190+((h>>5)%36)}};
+function coverEl(b){
+  const[bg,fg]=tone(b),L=(b.t||'').length;
+  return $('div',{class:'cover',style:`--bg:${bg};--fg:${fg};--ts:${L>70?12:L>40?14:17}px`},
+    $('i',{class:'qd q'+b.q,title:QL[b.q]}),
+    $('b',{class:'ct'},b.t||'(sans titre)'),
+    $('div',null,$('span',{class:'ca'},b.a||''),$('em',{class:'cc'},b.sp?(b.sp==='EnBas'?'En bas':'Non classé'):b.c)))}
+function itemEl(b){
+  const[bg,fg]=tone(b),{sw,sh}=dims(b);
+  return $('div',{class:'it',style:`--bg:${bg};--fg:${fg};--sw:${sw}px;--sh:${sh}px`,'aria-hidden':'true'},
+    $('div',{class:'spine'},$('span',null,b.t||'(sans titre)')),coverEl(b))}
+function detailEl(b,i,n){
+  const dl=$('dl'),add=(k,v)=>{if(v)dl.append($('dt',null,k),$('dd',null,v))};
+  add('Éditeur',b.p);add('Année',b.y);add('ISBN',b.i);add('Sujet',b.s);add('Fiabilité',QL[b.q]);add('Source',b.src);
+  if(b.n>1)add('Photos',`Vu ${b.n} fois sur les photos`);
+  add('Emplacement',place(b));
+  return $('div',{class:'detail','aria-live':'polite'},
+    $('div',null,
+      $('div',{class:'eyebrow'},`${place(b)} · n° ${i+1} sur ${n}`),
+      $('h3',null,b.t||'(sans titre)'),
+      $('p',{class:'by'},b.a||'Auteur non lu'),dl,
+      $('div',{class:'btns'},
+        b.u?$('a',{class:'btn',href:b.u,target:'_blank',rel:'noopener'},'Notice du catalogue ↗'):null,
+        b.q===0?$('span',{class:'note'},'Texte OCR brut : à confirmer devant l\'étagère.'):null)),
+    $('div',{class:'bigcover'},coverEl(b)))}
+
+function stage(items,detailBox){
+  const N=items.length,els=new Map();
+  const st=$('div',{class:'stage',tabindex:'0',role:'group','aria-label':'Étagère : flèches gauche et droite pour parcourir les livres'});
+  const tray=$('div',{class:'tray'});
+  const cap=$('div',{class:'cap'},$('strong'),$('span'));
+  const prev=$('button',{class:'nav p',type:'button','aria-label':'Livre précédent'},'‹'),next=$('button',{class:'nav n',type:'button','aria-label':'Livre suivant'},'›');
+  st.append($('div',{class:'mark','aria-hidden':'true'},selMark()),$('div',{class:'floor'}),tray,cap,prev,next);
+  const range=$('input',{class:'scrub',type:'range',min:0,max:Math.max(0,N-1),value:S.cur,'aria-label':'Position dans l\'étagère'});
+  const cnt=$('span',{class:'cnt'});
+  const row=$('div',{class:'scrubrow'},range,cnt);
+  const W=7,SP=27,CW=matchMedia('(max-width:640px)').matches?132:158;
+  function paint(){
+    const cur=S.cur;
+    for(const[i,el]of els)if(Math.abs(i-cur)>W+4){el.remove();els.delete(i)}
+    for(let i=Math.max(0,cur-W-4);i<=Math.min(N-1,cur+W+4);i++){
+      let el=els.get(i);
+      if(!el){el=itemEl(items[i]);el.addEventListener('click',()=>{if(!st._moved)go2(i)});tray.append(el);els.set(i,el);
+        const d0=i-cur,s0=Math.sign(d0);el.style.transform=`translateX(calc(-50% + ${s0*(CW/2+260)}px)) translateZ(-200px) rotateY(${s0*55}deg)`;el.style.opacity='0';void el.offsetWidth}
+      const d=i-cur,a=Math.abs(d),s=Math.sign(d),sw=dims(items[i]).sw;
+      const x=d===0?0:s*(CW/2+14+sw*.5+(a-1)*SP);
+      el.classList.toggle('on',d===0);
+      el.style.transform=d===0?'translateX(-50%) translateZ(70px)':`translateX(calc(-50% + ${x}px)) translateZ(${-a*16}px) rotateY(${s*52}deg)`;
+      el.style.zIndex=String(100-a);
+      el.style.opacity=a>W?String(Math.max(0,1-(a-W)*.34)):'1';
+      el.style.pointerEvents=a>W+1?'none':'auto';
+      el.setAttribute('aria-hidden',d===0?'false':'true');
+    }
+    const b=items[cur];
+    cap.firstChild.textContent=b.t||'(sans titre)';
+    cap.lastChild.textContent=[b.a,b.y,b.c].filter(Boolean).join(' · ');
+    range.value=cur;cnt.textContent=`${cur+1} / ${N}`;
+    prev.disabled=cur===0;next.disabled=cur===N-1;
+    detailBox.replaceChildren(detailEl(b,cur,N));
+  }
+  function go2(i){i=Math.max(0,Math.min(N-1,i));if(i===S.cur)return;S.cur=i;paint()}
+  prev.addEventListener('click',()=>go2(S.cur-1));next.addEventListener('click',()=>go2(S.cur+1));
+  range.addEventListener('input',()=>go2(+range.value));
+  st.addEventListener('keydown',e=>{
+    const k={ArrowLeft:-1,ArrowRight:1,PageUp:-8,PageDown:8}[e.key];
+    if(k){e.preventDefault();go2(S.cur+k)}else if(e.key==='Home'){e.preventDefault();go2(0)}else if(e.key==='End'){e.preventDefault();go2(N-1)}});
+  let x0=null;
+  st.addEventListener('pointerdown',e=>{if(e.target.closest('.nav'))return;x0=e.clientX;st._moved=false});
+  st.addEventListener('pointermove',e=>{if(x0===null)return;const dx=e.clientX-x0;
+    if(Math.abs(dx)>=34){st._moved=true;go2(S.cur-Math.sign(dx));x0=e.clientX}});
+  const end=()=>{x0=null;setTimeout(()=>{st._moved=false},0)};
+  st.addEventListener('pointerup',end);st.addEventListener('pointerleave',end);st.addEventListener('pointercancel',end);
+  let acc=0;
+  st.addEventListener('wheel',e=>{if(Math.abs(e.deltaX)>Math.abs(e.deltaY)){e.preventDefault();acc+=e.deltaX;if(Math.abs(acc)>45){go2(S.cur+Math.sign(acc));acc=0}}},{passive:false});
+  paint();
+  return{st,row}}
+
+function fillShelf(box){
   box.replaceChildren();
-  const all=matches(),[h,sub]=selTitle();
-  const items=fq(all);
+  const all=matches(),[h,sub]=selTitle(),items=fq(all);
+  S.cur=Math.max(0,Math.min(S.cur,items.length-1));
   box.append($('div',{class:'list-h'},$('div',null,$('h3',null,h),$('p',null,sub+' · '+plural(all.length,'livre','livres')))));
-  if(!S.sel)box.append($('p',{class:'note'},'Clique une case, une lettre (étagère) ou un chiffre (colonne) sur le meuble pour voir ses livres.'));
-  box.append(chips(all,()=>fillList(box)));
-  const sc=$('div',{class:'scroll'});box.append(sc);
-  sc.append(bookList(items,box,false));
-  box.append(quality());
+  if(!S.sel)box.append($('p',{class:'note'},'Clique une case, une lettre (étagère) ou un chiffre (colonne) sur le meuble pour voir ses livres. En attendant, voici toute la pièce.'));
+  box.append(chips(all,()=>{S.cur=0;fillShelf(box)}));
+  if(!items.length){box.append($('div',{class:'empty'},'Aucun livre avec ce filtre. Essaie « Tous ».'));box.append(quality());return}
+  const dbox=$('div');
+  const{st,row}=stage(items,dbox);
+  box.append(st,row,dbox);
+  const lb=$('details',{class:'listbox'},$('summary',null,`Voir la liste (${items.length})`));
+  let built=false;
+  lb.addEventListener('toggle',()=>{if(lb.open&&!built){built=true;lb.append(bookList(items,box,false))}});
+  box.append(lb,quality());
 }
 const fq=(a,f=S.filter)=>f===-1?a:f===-2?a.filter(b=>b.q>0):a.filter(b=>b.q===f);
 function chips(all,again){
@@ -260,7 +397,7 @@ function bookList(items,box,showLoc){
   const ul=$('ul',{class:'books'});
   items.slice(0,S.limit).forEach((b,i)=>ul.append(bookRow(b,i,showLoc)));
   const wrap=$('div',null,ul);
-  if(items.length>S.limit)wrap.append($('button',{class:'more',type:'button',onclick:()=>{S.limit+=200;box===null?renderResults():fillList(box)}},`Afficher la suite (${items.length-S.limit} restants)`));
+  if(items.length>S.limit)wrap.append($('button',{class:'more',type:'button',onclick:()=>{S.limit+=200;if(box===null)renderResults();else wrap.replaceWith(bookList(items,box,showLoc))}},`Afficher la suite (${items.length-S.limit} restants)`));
   return wrap}
 function bookRow(b,i,showLoc){
   const key=b.w+b.c+'|'+b.t+'|'+b.a;
